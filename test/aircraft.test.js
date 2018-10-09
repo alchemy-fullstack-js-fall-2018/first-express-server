@@ -18,6 +18,12 @@ describe('aircraft model', () => {
             .then(ca => createdAircraft = ca);
     });
 
+
+    it('gets a spy by id', () => {
+        return Aircraft.get(createdAircraft[0]._id)
+            .then(receivedAircraft => expect(receivedAircraft).toEqual(createdAircraft[0]));
+    });
+
     it('gets all aircraft', () => {
         return Aircraft.getAll()
             .then(receivedAircrafts => expect(receivedAircrafts).toHaveLength(3));
