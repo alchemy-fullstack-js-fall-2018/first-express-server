@@ -3,7 +3,7 @@ require('dotenv').config();
 const app = require('../lib/app');
 const Celebs = require('../lib/models/Celebs');
 
-describe.only('celebs', () => {
+describe('celebs', () => {
 
     const celebs = [
         { name: 'James Bond', job: 'Spy' },
