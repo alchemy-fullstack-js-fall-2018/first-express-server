@@ -68,4 +68,12 @@ describe('bar API', () => {
                 expect(res.body).toEqual(createdBars[0]);
             });
     });
+
+    it('deletes a bar by id', () => {
+        return request(app)
+            .delete(`/api/bars/${createdBars[0]._id}`)
+            .then(res => {
+                expect(res.body).toEqual({ removed: true });
+            });
+    });
 });
