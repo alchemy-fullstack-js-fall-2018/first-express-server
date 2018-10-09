@@ -11,8 +11,8 @@ describe('all about cars', () => {
         return {
             type: 'new',
             make: 'honda',
-            year: chance.guid({ version: 4 }),
-            models: chance.guid({ version: 4 }),
+            year: chance.year(),
+            models: chance.word()
         };
     });
 
@@ -74,7 +74,7 @@ describe('all about cars', () => {
     });
 
     it('updates car info', () => {
-        return request(app).put(`/api/cars/${createdCars}[0]._id`)
+        return request(app).put(`/api/cars/${createdCars[0]._id}`)
             .send({ type: 'used', make: 'bmw', year: '2018', models: 'm3' })
             .then(res => {
                 expect(res.body).toEqual({ _id: expect.any(String), type: 'used', make: 'bmw', year: '2018', models: 'm3' });
