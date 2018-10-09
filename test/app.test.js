@@ -70,12 +70,20 @@ describe('album DB', () => {
             });
     });
 
-    it('updates an album with supplied requset body', () => {
+    it('updates an album with supplied request body', () => {
         return request(app)
             .put(`/api/albums/${createdAlbums[0]._id}`)
             .send({ albumName: 'Wish You Were Here' })
             .then(res => {
                 expect(res.body).toEqual({ ...createdAlbums[0], albumName: 'Wish You Were Here' });
+            });
+    });
+
+    it('sends 404 error if supplied with incorrect URI', () => {
+        return request(app)
+            .get('/api/podcasts')
+            .then(res => {
+                expect(res.statusCode).toEqual(404);
             });
     });
 });
