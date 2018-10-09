@@ -50,6 +50,13 @@ describe('app authors', () => {
                 expect(res.body).toEqual(createdAuthors);
             });
     });
-
+    
+    it('gets an author by id', () => {
+        return request(app)
+            .get(`/api/authors/${createdAuthors[0]._id}`)
+            .then(res => {
+                expect(res.body).toEqual(createdAuthors[0]);
+            });
+    });
     
 });
