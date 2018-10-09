@@ -39,10 +39,16 @@ describe('Aircraft E2E test', () => {
     it('get an aircraft by id', () => {
         return request(app)
             .get(`/api/aircrafts/${createdAircrafts[0]._id}`)
-            .then(res => {
-                console.log(res.body);
-                console.log(createdAircrafts[0]);
-                expect(res.body).toEqual(createdAircrafts[0]);
+            .then(res => expect(res.body).toEqual(createdAircrafts[0]));
+    });
+
+    it('gets all aircraft on get', () => {
+        return request(app)
+            .get('/api/aircrafts')
+            .then(retreivedAircrafts => {
+                createdAircrafts.forEach(createdAircraft => {
+                    expect(retreivedAircrafts.body).toContainEqual(createdAircraft);
+                });
             });
     });
 
