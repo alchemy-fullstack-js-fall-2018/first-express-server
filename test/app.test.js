@@ -2,6 +2,7 @@ require('dotenv').config();
 const request = require('supertest');
 const app = require('../lib/app');
 const db = require('../lib/mongo-connector');
+const Authors = require('../lib/models/Authors');
 
 describe('app authors', () => {
     const authors = [
@@ -59,4 +60,12 @@ describe('app authors', () => {
             });
     });
     
+    it('deletes an author by id', () => {
+        return request(app)
+            .get(`/api/authors/${createdAuthors[0]._id}`)
+            .then(() => Authors.getAll())
+            .then(res => {
+                expect(res.body).toContainEqual(createdAuthors[1], createdAuthors[2]);
+            });
+    });
 });
