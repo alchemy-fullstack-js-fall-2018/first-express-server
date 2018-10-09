@@ -75,4 +75,18 @@ describe('event pub/sub API', () => {
             });
     });
 
+    it('updates a game by id', () => {
+        const updatedGame = { title: 'The Settlers of Catan', numPlayers: 6, minutesPerGame: 45 };
+        return request(app)
+            .put(`/games/${createdGames[1]._id}`)
+            .send(updatedGame)
+            .then ((success) => {
+                return request(app).get(`/games/${createdGames[1]._id}`)
+                    .then(res => {
+                        console.log(res.body);
+                        expect(res.body.title).toEqual(updatedGame.title);
+                    });
+            });
+    });
+
 });
