@@ -6,7 +6,7 @@ const Chance = require('chance');
 const chance = new Chance();
 
 describe('array of insects', () => {
-    let insects = Array.apply(null, { length: 100 }).map(() => {
+    let insects = Array.apply(null, { length: 20 }).map(() => {
         return {
             type: '6 legs',
         };
@@ -41,6 +41,16 @@ describe('array of insects', () => {
                 expect(res.body).toEqual({
                     _id: expect.any(String),
                     type: '6 legs',
+                });
+            });
+    });
+
+    it('gets all insects on get', () => {
+        return request(app)
+            .get('/api/insects')
+            .then(retrievedInsects => {
+                createdInsects.forEach(createdInsect => {
+                    expect(retrievedInsects.body).toContainEqual(createdInsect);
                 });
             });
     });
