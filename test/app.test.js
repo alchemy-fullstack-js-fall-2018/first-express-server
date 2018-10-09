@@ -70,4 +70,15 @@ describe('event pub/sub API', () => {
             });
     });
 
+    it('kills a spy', () => {
+        return request(app)
+            .delete(`/api/video-games/${createdGames[0]._id}`)
+            .then(deletedGame => {
+                return request(app)
+                    .get(`/api/video-games/${deletedGame.body._id}`);
+            })
+            .then(res => {
+                expect(res.body).toBeNull();
+            });
+    });
 });
