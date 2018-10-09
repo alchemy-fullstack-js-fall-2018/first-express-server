@@ -52,7 +52,6 @@ describe('Aircraft E2E test', () => {
             });
     });
 
-
     it('creates an aircraft on post', () => {
         return request(app)
             .post('/api/aircrafts')
@@ -60,6 +59,12 @@ describe('Aircraft E2E test', () => {
             .then(res => expect(res.body).toEqual({ _id: expect.any(String), type: 'A-10', nickname: 'Thunderbird', speed: 439, released: 1977, active: true }));
     });
 
+    it('demolishes an aircraft on delete', () => {
+        return request(app)
+            .delete(`/api/aircrafts/${createdAircrafts[0]._id}`)
+            .then(destroyedAircraft => request(app).get(`/api/aircraft/${destroyedAircraft.body._id}`))
+            .then(res => expect(res.body).toEqual({}));
+    });
 
 
 });
