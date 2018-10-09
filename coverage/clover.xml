@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1539046995141" clover="3.2.0">
+  <project timestamp="1539046995142" name="All files">
+    <metrics statements="38" coveredstatements="38" conditionals="0" coveredconditionals="0" methods="21" coveredmethods="21" elements="59" coveredelements="59" complexity="0" loc="38" ncloc="38" packages="3" files="4" classes="4">
+      <package name="lib">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <file name="app.js" path="C:\Users\klpai\alchemy\Fullstack\first-express-server\lib\app.js">
+          <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="9" count="1" type="stmt"/>
+        </file>
+        <file name="mongo-connector.js" path="C:\Users\klpai\alchemy\Fullstack\first-express-server\lib\mongo-connector.js">
+          <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+          <line num="3" count="1" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="8" count="1" type="stmt"/>
+          <line num="9" count="1" type="stmt"/>
+          <line num="12" count="1" type="stmt"/>
+          <line num="13" count="21" type="stmt"/>
+          <line num="14" count="21" type="stmt"/>
+        </file>
+      </package>
+      <package name="lib.models">
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="10"/>
+        <file name="Games.js" path="C:\Users\klpai\alchemy\Fullstack\first-express-server\lib\models\Games.js">
+          <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="10"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="6" count="13" type="stmt"/>
+          <line num="8" count="13" type="stmt"/>
+          <line num="10" count="13" type="stmt"/>
+          <line num="14" count="1" type="stmt"/>
+          <line num="16" count="1" type="stmt"/>
+          <line num="18" count="1" type="stmt"/>
+          <line num="22" count="2" type="stmt"/>
+          <line num="23" count="2" type="stmt"/>
+          <line num="28" count="1" type="stmt"/>
+          <line num="29" count="1" type="stmt"/>
+          <line num="30" count="1" type="stmt"/>
+          <line num="35" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="lib.routes">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="8"/>
+        <file name="games.js" path="C:\Users\klpai\alchemy\Fullstack\first-express-server\lib\routes\games.js">
+          <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="8"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="6" count="13" type="stmt"/>
+          <line num="7" count="13" type="stmt"/>
+          <line num="8" count="13" type="stmt"/>
+          <line num="13" count="1" type="stmt"/>
+          <line num="17" count="2" type="stmt"/>
+          <line num="18" count="2" type="stmt"/>
+          <line num="22" count="1" type="stmt"/>
+          <line num="23" count="1" type="stmt"/>
+        </file>
+      </package>
+    </metrics>
+  </project>
+</coverage>

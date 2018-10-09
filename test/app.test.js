@@ -63,10 +63,11 @@ describe('event pub/sub API', () => {
             });
     });
 
-    it.skip('deletes a game by id', () => {
+    it('deletes a game by id', () => {
         return request(app)
             .delete(`/games/${createdGames[0]._id}`)
-            .then (() => {
+            .then ((success) => {
+                console.log(success.body);
                 return request(app).get(`/games/${createdGames[0]._id}`)
                     .then(res => {
                         expect(res.body).toEqual(null);
