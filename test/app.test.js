@@ -62,10 +62,27 @@ describe('app authors', () => {
     
     it('deletes an author by id', () => {
         return request(app)
-            .get(`/api/authors/${createdAuthors[0]._id}`)
+            .delete(`/api/authors/${createdAuthors[0]._id}`)
             .then(() => Authors.getAll())
-            .then(res => {
-                expect(res.body).toContainEqual(createdAuthors[1], createdAuthors[2]);
+            .then(updatedList => {
+                expect(updatedList).toEqual(
+                    expect.arrayContaining([expect.objectContaining({ firstName: createdAuthors[1].firstName })])
+                );
+                expect(updatedList).toEqual(
+                    expect.arrayContaining([expect.objectContaining({ lastName: createdAuthors[1].lastName })])
+                );
+                expect(updatedList).toEqual(
+                    expect.arrayContaining([expect.objectContaining({ firstName: createdAuthors[2].firstName })])
+                );
+                expect(updatedList).toEqual(
+                    expect.arrayContaining([expect.objectContaining({ lastName: createdAuthors[2].lastName })])
+                );
+                expect(updatedList).toEqual(
+                    expect.not.arrayContaining([expect.objectContaining({ firstName: createdAuthors[0].firstName })])
+                );
+                expect(updatedList).toEqual(
+                    expect.not.arrayContaining([expect.objectContaining({ lastName: createdAuthors[0].lastName })])
+                );
             });
     });
 });
