@@ -1,3 +1,4 @@
+/* eslint-disable*/
 require('dotenv').config();
 const request = require('supertest');
 const app = require('../lib/app');
@@ -71,6 +72,18 @@ describe('array of insects', () => {
                     .get(`/api/insects/${createdInsects[0]._id}`)
                     .then(res => {
                         expect(res.body).toEqual(null);
+                    });
+            });  
+    });
+
+    it.skip('updates body', () => {
+        return request(app)
+            .put(`/api/insects/${createdInsects[0]._id}`)
+            .then(()=> {
+                return request(app)
+                    .put(`/api/insects/${createdInsects[0]._id}`)
+                    .then(res => {
+                        expect(res.body).toEqual(createdInsects[0]);
                     });
             });  
     });
