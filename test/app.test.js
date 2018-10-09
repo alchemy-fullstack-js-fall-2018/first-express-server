@@ -32,7 +32,7 @@ describe('bar API', () => {
             createdBars = barsRes;
         });
     });
-    
+
     it('creates a bar on POST', () => {
         return request(app)
             .post('/api/bars')
@@ -58,6 +58,14 @@ describe('bar API', () => {
                 createdBars.forEach(createdBar => {
                     expect(retrievedBars.body).toContainEqual(createdBar);
                 });
+            });
+    });
+
+    it('gets a bar by id', () => {
+        return request(app)
+            .get(`/api/bars/${createdBars[0]._id}`)
+            .then(res => {
+                expect(res.body).toEqual(createdBars[0]);
             });
     });
 });
