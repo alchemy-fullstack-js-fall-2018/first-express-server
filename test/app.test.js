@@ -3,7 +3,7 @@ const request = require('supertest');
 const app = require('../lib/app');
 const db = require('../lib/mongo-connector');
 
-describe('event pub/sub API', () => {
+describe('game pub/sub API', () => {
 
     let seedGames = [
         { title: 'Blokus', numPlayers: 4, minutesPerGame: 30 },
@@ -66,8 +66,7 @@ describe('event pub/sub API', () => {
     it('deletes a game by id', () => {
         return request(app)
             .delete(`/games/${createdGames[0]._id}`)
-            .then ((success) => {
-                console.log(success.body);
+            .then (() => {
                 return request(app).get(`/games/${createdGames[0]._id}`)
                     .then(res => {
                         expect(res.body).toEqual(null);
@@ -80,10 +79,9 @@ describe('event pub/sub API', () => {
         return request(app)
             .put(`/games/${createdGames[1]._id}`)
             .send(updatedGame)
-            .then ((success) => {
+            .then (() => {
                 return request(app).get(`/games/${createdGames[1]._id}`)
                     .then(res => {
-                        console.log(res.body);
                         expect(res.body.title).toEqual(updatedGame.title);
                     });
             });
