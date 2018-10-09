@@ -3,7 +3,7 @@ require('dotenv').config();
 const app = require('../lib/app');
 const Celebs = require('../lib/models/Celebs');
 
-describe('celebs', () => {
+describe.only('celebs', () => {
 
     const celebs = [
         { name: 'James Bond', job: 'Spy' },
@@ -37,6 +37,22 @@ describe('celebs', () => {
                     name: 'Jack Sparrow',
                     job: 'Pirate'
                 });
+            });
+    });
+
+    it('gets all Celebs in our db', () => {
+        return request(app).get('/api/celebs')
+            .then(retrievedCelebs => {
+                createdCelebs.forEach(createdCeleb => {
+                    expect(retrievedCelebs.body).toContainEqual(createdCeleb);
+                });
+            });
+    });
+
+    it('gets a Celeb by id in our db', () => {
+        return request(app).get(`/api/celebs/${createdCelebs[0]._id}`)
+            .then(res => {
+                expect(res.body).toEqual(createdCelebs[0]);
             });
     });
 
