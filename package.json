@@ -1,0 +1,29 @@
+{
+  "name": "first-express-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acrankin/first-express-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acrankin/first-express-server/issues"
+  },
+  "homepage": "https://github.com/acrankin/first-express-server#readme",
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.4"
+  }
+}
