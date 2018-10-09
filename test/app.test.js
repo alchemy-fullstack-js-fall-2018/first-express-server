@@ -56,4 +56,12 @@ describe.only('celebs', () => {
             });
     });
 
+    it('updates a Celeb by id in our db', () => {
+        return request(app).put(`/api/celebs/${createdCelebs[0]._id}`)
+            .send({ name: 'Sterling Archer' })
+            .then(res => {
+                expect(res.body).toEqual({ ...createdCelebs[0], name: 'Sterling Archer' });
+            });
+    });
+
 });
