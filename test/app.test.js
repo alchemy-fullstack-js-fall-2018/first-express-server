@@ -66,11 +66,9 @@ describe('game pub/sub API', () => {
     it('deletes a game by id', () => {
         return request(app)
             .delete(`/games/${createdGames[0]._id}`)
-            .then (() => {
-                return request(app).get(`/games/${createdGames[0]._id}`)
-                    .then(res => {
-                        expect(res.body).toEqual(null);
-                    });
+            .then (() => request(app).get(`/games/${createdGames[0]._id}`))
+            .then(res => {
+                expect(res.body).toEqual(null);
             });
     });
 
@@ -79,11 +77,9 @@ describe('game pub/sub API', () => {
         return request(app)
             .put(`/games/${createdGames[1]._id}`)
             .send(updatedGame)
-            .then (() => {
-                return request(app).get(`/games/${createdGames[1]._id}`)
-                    .then(res => {
-                        expect(res.body.title).toEqual(updatedGame.title);
-                    });
+            .then (() => request(app).get(`/games/${createdGames[1]._id}`))
+            .then(res => {
+                expect(res.body.title).toEqual(updatedGame.title);
             });
     });
 
