@@ -41,9 +41,13 @@ describe('aircraft model', () => {
             });
     });
 
+    it('updates an aircraft by id', () => {
+        return Aircraft.update(createdAircraft[2]._id, { ...createdAircraft[2], active: true, speed: 2500 })
+            .then(receivedAircraft => expect(receivedAircraft).toEqual({ ...createdAircraft[2], active: true, speed: 2500 }));
+    });
 
-    it('udpates an aircraft by id', () => {
-        return Aircraft.update(createdAircraft[2]._id, { active: true, speed: 2500 })
+    it('patches an aircraft by id', () => {
+        return Aircraft.patch(createdAircraft[2]._id, { active: true, speed: 2500 })
             .then(receivedAircraft => expect(receivedAircraft).toEqual({ ...createdAircraft[2], active: true, speed: 2500 }));
     });
 
