@@ -64,4 +64,11 @@ describe.only('celebs', () => {
             });
     });
 
+    it('removes a Celeb by id in our db', () => {
+        return request(app).delete(`/api/celebs/${createdCelebs[0]._id}`)
+            .then(res => {
+                expect(res.body).toEqual({ removed: true });
+            });
+    });
+
 });
