@@ -28,7 +28,7 @@ describe('album DB', () => {
             });
     });
 
-    it('creates an event on post', () => {
+    it('creates an album on post', () => {
         return request(app)
             .post('/api/albums')
             .send({
@@ -59,6 +59,23 @@ describe('album DB', () => {
             .get(`/api/albums/${createdAlbums[1]._id}`)
             .then(res => {
                 expect(res.body).toEqual(createdAlbums[1]);
+            });
+    });
+
+    it('deletes an album by id', () => {
+        return request(app)
+            .delete(`/api/albums/${createdAlbums[1]._id}`)
+            .then(res => {
+                expect(res.body).toEqual({ removed: true }); 
+            });
+    });
+
+    it('updates an album with supplied requset body', () => {
+        return request(app)
+            .put(`/api/albums/${createdAlbums[0]._id}`)
+            .send({ albumName: 'Wish You Were Here' })
+            .then(res => {
+                expect(res.body).toEqual({ ...createdAlbums[0], albumName: 'Wish You Were Here' });
             });
     });
 });
