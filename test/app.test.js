@@ -7,7 +7,7 @@ describe('album DB', () => {
 
     let albums = [
         { band: 'Rolling Stones', albumName: 'Goats Head Soup' },
-        { band: 'The Beatles', albumName: 'Revolver'}
+        { band: 'The Beatles', albumName: 'Revolver' }
     ];
 
     let createdAlbums;
@@ -51,6 +51,14 @@ describe('album DB', () => {
                 createdAlbums.forEach(createdAlbum => {
                     expect(retrievedAlbums.body).toContainEqual(createdAlbum);
                 });
+            });
+    });
+
+    it('gets an album by id', () => {
+        return request(app)
+            .get(`/api/albums/${createdAlbums[1]._id}`)
+            .then(res => {
+                expect(res.body).toEqual(createdAlbums[1]);
             });
     });
 });
