@@ -6,6 +6,33 @@ const Chance = require('chance');
 const chance = new Chance();
 
 describe('bar API', () => {
+    let bars = Array.apply(null, { length: 100 }).map(() => {
+        return {
+            name: chance.guid({ version: 4 }),
+            quadrant: chance.guid({ version: 4 }),
+            hasPatio: chance.guid({ version: 4 })
+        };
+    });
+
+    let createdBars;
+
+    const createBar = bar => {
+        return request(app)
+            .post('/api/bars')
+            .send(bar)
+            .then(res => res.body);
+    };
+
+    beforeEach(() => {
+        return db('bars').then(collection => collection.deleteMany());
+    });
+
+    beforeEach(() => {
+        return Promise.all(bars.map(createBar)).then(barsRes => {
+            createdBars = barsRes;
+        });
+    });
+    
     it('creates a bar on POST', () => {
         return request(app)
             .post('/api/bars')
@@ -20,6 +47,16 @@ describe('bar API', () => {
                     name: 'Test Bar',
                     quadrant: 'SE',
                     hasPatio: false
+                });
+            });
+    });
+
+    it('gets all created bars', () => {
+        return request(app)
+            .get('/api/bars')
+            .then(retrievedBars => {
+                createdBars.forEach(createdBar => {
+                    expect(retrievedBars.body).toContainEqual(createdBar);
                 });
             });
     });
