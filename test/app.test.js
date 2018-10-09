@@ -43,7 +43,13 @@ describe('app authors', () => {
             });
     });
 
-    
+    it('gets all authors', () => {
+        return request(app)
+            .get('/api/authors')
+            .then(res => {
+                expect(res.body).toEqual(createdAuthors);
+            });
+    });
 
     
 });
