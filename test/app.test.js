@@ -69,6 +69,15 @@ describe('bar API', () => {
             });
     });
 
+    it('changes a bar by id', () => {
+        return request(app)
+            .put(`/api/bars/${createdBars[1]._id}`)
+            .send({ hasPatio: true })
+            .then(res => {
+                expect(res.body).toEqual({ ...createdBars[1], hasPatio: true })
+            });
+    });
+
     it('deletes a bar by id', () => {
         return request(app)
             .delete(`/api/bars/${createdBars[0]._id}`)
