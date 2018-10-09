@@ -17,6 +17,21 @@ beforeEach(() => {
 });
 
 describe('Celebs', () => {
+
+    it('gets a Celeb id', () => {
+        return Celebs.get(createdCelebs[0]._id)
+            .then(receivedCeleb => {
+                expect(receivedCeleb).toEqual(createdCelebs[0]);
+            });
+    });
+
+    it('gets all Celebs', () => {
+        return Celebs.getAll()
+            .then(receivedCelebs => {
+                expect(receivedCelebs).toHaveLength(2);
+            });
+    });
+
     it('creates a celeb in my db', () => {
         return Celebs.create('Jack Sparrow', 'Pirate')
             .then(createdCeleb => {
