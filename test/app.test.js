@@ -79,13 +79,13 @@ describe('deep sea creatures', () => {
 
     });
 
-    // it('updates a creature', () => {
-    //     return request(app).put(`/creatures/${createdCreatures[0]._id}`)
-    //         .send({ depth: 'up to 1500 meters' })
-    //         .then(res => {
-    //             expect(res.body).toEqual({ ...createdCreatures[0], depth: 'up to 1500 meters' });
-    //         });
-    // });
+    it.skip('updates a creature', () => {
+        return request(app).put(`/creatures/${createdCreatures[0]._id}`)
+            .send({ depth: 'up to 1500 meters' })
+            .then(res => {
+                expect(res.body).toEqual({ ...createdCreatures[0], depth: 'up to 1500 meters' });
+            });
+    });
 
 });
 
