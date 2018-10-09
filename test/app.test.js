@@ -6,17 +6,18 @@ const Chance = require('chance');
 const chance = new Chance();
 
 
-describe('event pub/sub API', () => {
+describe('VideoGames pub/sub API', () => {
+    
+    let createdGames;
 
-    let games = Array.apply(null, { length: 100 }).map(() => {
+    let games = Array.apply(null, { length: 25 }).map(() => {
         return {
             title: 'random game title',
             system: chance.guid({ version: 4 }),
             genre: chance.guid({ version: 4 })
         };
     });
-    let createdGames;
-
+    
     const createGame = game => {
         return request(app)
             .post('/api/video-games')
@@ -34,7 +35,7 @@ describe('event pub/sub API', () => {
         });
     });
 
-    it('creates an event on post', () => {
+    it('creates an game on post', () => {
         return request(app)
             .post('/api/video-games')
             .send({
@@ -52,7 +53,7 @@ describe('event pub/sub API', () => {
             });
     });
 
-    it('gets all games on get', () => {
+    it('gets all games', () => {
         return request(app)
             .get('/api/video-games')
             .then(retrievedGames => {
@@ -62,7 +63,7 @@ describe('event pub/sub API', () => {
             });
     });
 
-    it('gets an event by id', () => {
+    it('gets a game by id', () => {
         return request(app)
             .get(`/api/video-games/${createdGames[0]._id}`)
             .then(res => {
@@ -70,7 +71,7 @@ describe('event pub/sub API', () => {
             });
     });
 
-    it('kills a spy', () => {
+    it('deletes a game', () => {
         return request(app)
             .delete(`/api/video-games/${createdGames[0]._id}`)
             .then(deletedGame => {
@@ -79,6 +80,24 @@ describe('event pub/sub API', () => {
             })
             .then(res => {
                 expect(res.body).toBeNull();
+            });
+    });
+
+    it('updates a game', () => {
+        return request(app)
+            .put(`/api/video-games/${createdGames[5]._id}`)
+            .send({ 
+                title: 'Super Mario World',
+                system: 'Super Nintendo',
+                genre: 'Action Platformer' 
+            })
+            .then(res => {
+                expect(res.body).toEqual({
+                    _id: expect.any(String),
+                    title: 'Super Mario World',
+                    system: 'Super Nintendo',
+                    genre: 'Action Platformer' 
+                });
             });
     });
 });
