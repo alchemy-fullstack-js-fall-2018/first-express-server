@@ -14,12 +14,13 @@ describe('app authors', () => {
     let createdAuthors;
 
     const authorCreator = author => {
-        return request(app).post('/authors')
+        return request(app)
+            .post('api/authors')
             .send(author);
     };
 
     beforeEach(() => {
-        return Authors.drop();
+        return db('authors').then(collection => collection.deleteMany());
     });
 
     beforeEach(() => {
@@ -29,22 +30,20 @@ describe('app authors', () => {
             });
     });
 
-    
-});
-
-describe('error handling', () => {
-    it('returns 404 when there is no method', () => {
+    it('creates an author', () => {
         return request(app)
-            .patch('/authors')
-            .send({})
+            .post('/api/authors')
+            .send({ firstName: 'Ursula', lastName: 'Leguin' })
             .then(res => {
-                expect(res.statusCode).toEqual(404);
+                expect(res.body).toEqual({
+                    _id: expect.any(String),
+                    firstName: 'Ursula',
+                    lastName: 'Le Guin'
+                });
             });
     });
 
-    it('returns 404 when there is no route', () => {
-        return request(app).get('/muons').then(res => {
-            expect(res.statusCode).toEqual(404);
-        });
-    });
+    
+
+    
 });
