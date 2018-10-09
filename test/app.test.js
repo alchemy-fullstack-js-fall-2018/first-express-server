@@ -2,8 +2,8 @@ require('dotenv').config();
 const request = require('supertest');
 const app = require('../lib/app');
 const db = require('../lib/mongo-connector');
-const Insects = require('insects');
-const insect = new Insect();
+const Chance = require('chance');
+const chance = new Chance();
 
 describe('array of insects', () => {
     let insects = Array.apply(null, { length: 100 }).map(() => {
@@ -11,4 +11,38 @@ describe('array of insects', () => {
             type: '6 legs',
         };
     });
+    
+    let createdInsects;
+    
+    const createdInsect = insect => {
+        return request(app)
+            .post('/api/insects')
+            .send(insect)
+            .then(res => res.body);
+    };
+    
+    beforeEach(() => {
+        return db('insects').then(collection => collection.deleteMany());
+    });
+    
+    beforeEach(() => {
+        return Promise.all(insects.map(createdInsect)).then(insectsRes => {
+            createdInsects = insectsRes;
+        });
+    });
+    
+    it('creates an insect on post', () => {
+        return request(app)
+            .post('/api/insects')
+            .send({
+                type: '6 legs',
+            })
+            .then(res => {
+                expect(res.body).toEqual({
+                    _id: expect.any(String),
+                    type: '6 legs',
+                });
+            });
+    });
+    
 });
