@@ -74,11 +74,18 @@ describe('all about cars', () => {
     });
 
     it('updates car info', () => {
-
+        return request(app).put(`/api/cars/${createdCars}[0]._id`)
+            .send({ type: 'used', make: 'bmw', year: '2018', models: 'm3' })
+            .then(res => {
+                expect(res.body).toEqual({ _id: expect.any(String), type: 'used', make: 'bmw', year: '2018', models: 'm3' });
+            });
     });
 
-    it('delete car info', () => {
-
+    it('deletes car info', () => {
+        return request(app).delete(`/api/cars/${createdCars[0]._id}`)
+            .then(res => {
+                expect(res.body).toEqual({ removed: true });
+            });    
     });
 
     it('returns 404 when there is no method', () => {
