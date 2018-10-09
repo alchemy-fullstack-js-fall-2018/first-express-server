@@ -42,5 +42,10 @@ describe('aircraft model', () => {
     });
 
 
+    it('udpates an aircraft by id', () => {
+        return Aircraft.update(createdAircraft[2]._id, { active: true, speed: 2500 })
+            .then(receivedAircraft => expect(receivedAircraft).toEqual({ ...createdAircraft[2], active: true, speed: 2500 }));
+    });
+
 });
 
