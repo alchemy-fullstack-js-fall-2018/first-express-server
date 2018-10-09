@@ -64,11 +64,10 @@ describe('app authors', () => {
         return request(app)
             .delete(`/api/authors/${createdAuthors[0]._id}`)
             .then(() => Authors.getAll())
-            .then(() => {
-                return request(app).get(`/authors/${createdAuthors[0]._id}`)
-                    .then(res => {
-                        expect(res.body[0]).toBeFalsy();
-                    });
+            .then(authors => {
+                expect(authors).toContainEqual(createdAuthors[1]);
+                expect(authors).toContainEqual(createdAuthors[2]);
+                expect(authors).not.toContainEqual(createdAuthors[0]);
             });
     });
 
