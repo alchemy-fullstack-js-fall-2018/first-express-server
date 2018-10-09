@@ -2,7 +2,6 @@ require('dotenv').config();
 const request = require('supertest');
 const app = require('../lib/app');
 const db = require('../lib/mongo-connector');
-const Authors = require('../lib/models/Authors');
 
 describe('app authors', () => {
     const authors = [
@@ -15,8 +14,9 @@ describe('app authors', () => {
 
     const authorCreator = author => {
         return request(app)
-            .post('api/authors')
-            .send(author);
+            .post('/api/authors')
+            .send(author)
+            .then(author => author.body);
     };
 
     beforeEach(() => {
@@ -26,19 +26,19 @@ describe('app authors', () => {
     beforeEach(() => {
         return Promise.all(authors.map(authorCreator))
             .then(authors => {
-                createdAuthors = authors.map(author => author.body);
+                createdAuthors = authors;
             });
     });
 
     it('creates an author', () => {
         return request(app)
             .post('/api/authors')
-            .send({ firstName: 'Ursula', lastName: 'Leguin' })
+            .send({ firstName: 'Stephen', lastName: 'King' })
             .then(res => {
                 expect(res.body).toEqual({
                     _id: expect.any(String),
-                    firstName: 'Ursula',
-                    lastName: 'Le Guin'
+                    firstName: 'Stephen',
+                    lastName: 'King'
                 });
             });
     });
