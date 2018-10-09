@@ -2,7 +2,7 @@ require('dotenv').config();
 const { createServer } = require('http');
 const app = require('./lib/app');
 
-const port = 1000;
+const port = 3034;
 
 const server = createServer(app);
 

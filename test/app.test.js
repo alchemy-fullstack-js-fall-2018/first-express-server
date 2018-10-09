@@ -20,7 +20,7 @@ describe('all about cars', () => {
 
     const createCar = cars => {
         return request(app)
-            .post('api/cars')
+            .post('/api/cars')
             .send(cars)
             .then(res => res.body);        
     };
@@ -73,20 +73,27 @@ describe('all about cars', () => {
             });
     });
 
+    it('updates car info', () => {
 
+    });
 
+    it('delete car info', () => {
 
-   
+    });
 
-    // it('creates new car info on post', () => {
+    it('returns 404 when there is no method', () => {
+        return request(app)
+            .patch('/error')
+            .send({})
+            .then(res => {
+                expect(res.statusCode).toEqual(404);
+            });
+    });
 
-    // });
-
-    // it('creates new car info on post', () => {
-
-    // });
-
-
-
+    it('returns 404 when there is no route or a bad route', () => {
+        return request(app).post('/error').then(res => {
+            expect(res.statusCode).toEqual(404);
+        });
+    });
 
 });
