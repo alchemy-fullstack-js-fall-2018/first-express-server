@@ -85,4 +85,13 @@ describe('app authors', () => {
                 );
             });
     });
+
+    it('updates an author by id', () => {
+        const updatedAuthor = { firstName: 'Ursula', lastName: 'LeGuin'};
+        return request(app)
+            .put(`/api/authors/${createdAuthors[0]._id}`)
+            .then(res => {
+                expect(res.body).toEqual(updatedAuthor);
+            });
+    });
 });
