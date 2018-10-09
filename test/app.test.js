@@ -79,8 +79,8 @@ describe('deep sea creatures', () => {
 
     });
 
-    it.skip('updates a creature', () => {
-        return request(app).put(`/creatures/${createdCreatures[0]._id}`)
+    it('updates a creature', () => {
+        return request(app).put(`/api/creatures/${createdCreatures[0]._id}`)
             .send({ depth: 'up to 1500 meters' })
             .then(res => {
                 expect(res.body).toEqual({ ...createdCreatures[0], depth: 'up to 1500 meters' });
