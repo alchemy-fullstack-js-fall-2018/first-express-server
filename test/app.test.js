@@ -72,9 +72,9 @@ describe('bar API', () => {
     it('changes a bar by id', () => {
         return request(app)
             .put(`/api/bars/${createdBars[1]._id}`)
-            .send({ hasPatio: true })
+            .send({ name: 'Hale Pele' })
             .then(res => {
-                expect(res.body).toEqual({ ...createdBars[1], hasPatio: true })
+                expect(res.body).toEqual({ ...createdBars[1], name: 'Hale Pele' })
             });
     });
 
