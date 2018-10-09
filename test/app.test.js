@@ -64,34 +64,24 @@ describe('app authors', () => {
         return request(app)
             .delete(`/api/authors/${createdAuthors[0]._id}`)
             .then(() => Authors.getAll())
-            .then(updatedList => {
-                expect(updatedList).toEqual(
-                    expect.arrayContaining([expect.objectContaining({ firstName: createdAuthors[1].firstName })])
-                );
-                expect(updatedList).toEqual(
-                    expect.arrayContaining([expect.objectContaining({ lastName: createdAuthors[1].lastName })])
-                );
-                expect(updatedList).toEqual(
-                    expect.arrayContaining([expect.objectContaining({ firstName: createdAuthors[2].firstName })])
-                );
-                expect(updatedList).toEqual(
-                    expect.arrayContaining([expect.objectContaining({ lastName: createdAuthors[2].lastName })])
-                );
-                expect(updatedList).toEqual(
-                    expect.not.arrayContaining([expect.objectContaining({ firstName: createdAuthors[0].firstName })])
-                );
-                expect(updatedList).toEqual(
-                    expect.not.arrayContaining([expect.objectContaining({ lastName: createdAuthors[0].lastName })])
-                );
+            .then(() => {
+                return request(app).get(`/authors/${createdAuthors[0]._id}`)
+                    .then(res => {
+                        expect(res.body[0]).toBeFalsy();
+                    });
             });
     });
 
     it('updates an author by id', () => {
-        const updatedAuthor = { firstName: 'Ursula', lastName: 'LeGuin'};
-        return request(app)
-            .put(`/api/authors/${createdAuthors[0]._id}`)
+        const updatedAuthor = { firstName: 'Ursula', lastName: 'LeGuin' };
+        return request(app).put(`/api/authors/${createdAuthors[0]._id}`)
+            .send(updatedAuthor)
             .then(res => {
-                expect(res.body).toEqual(updatedAuthor);
+                expect(res.body).toEqual({
+                    _id: expect.any(String),
+                    firstName: 'Ursula',
+                    lastName: 'LeGuin'
+                });
             });
     });
 });
