@@ -54,5 +54,12 @@ describe('array of insects', () => {
                 });
             });
     });
+    it('gets an insect by id', () => {
+        return request(app)
+            .get(`/api/insects/${createdInsects[0]._id}`)
+            .then(res => {
+                expect(res.body).toEqual(createdInsects[0]);
+            });
+    });
     
 });
