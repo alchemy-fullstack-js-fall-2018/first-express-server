@@ -79,6 +79,7 @@ describe('array of insects', () => {
     it.skip('updates body', () => {
         return request(app)
             .put(`/api/insects/${createdInsects[0]._id}`)
+            .send({type : 'has 8 legs' })
             .then(()=> {
                 return request(app)
                     .put(`/api/insects/${createdInsects[0]._id}`)
