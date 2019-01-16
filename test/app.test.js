@@ -1,8 +1,7 @@
-require('dotenv').config();
-const request = require('supertest');
 const app = require('../lib/app');
 const db = require('../lib/mongo-connector');
 const Authors = require('../lib/models/Authors');
+const request = require('supertest');
 
 describe('app authors', () => {
     const authors = [
